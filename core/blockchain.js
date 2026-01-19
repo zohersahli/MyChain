@@ -1,5 +1,6 @@
-const Block = require('./block');
-const Transaction = require('./transaction');
+import crypto from "crypto";
+import Block from "./block.js";
+import Transaction from "./transaction.js";
 
 class Blockchain {
   constructor() {
@@ -10,7 +11,7 @@ class Blockchain {
   }
 
   createGenesisBlock() {
-    return new Block(0, '2025-01-01T00:00:00.000Z', 'Genesis Block', '0');
+    return new Block(0, "2025-01-01T00:00:00.000Z", "Genesis Block", "0");
   }
 
   getLatestBlock() {
@@ -46,28 +47,25 @@ class Blockchain {
   }
 
   minePendingTransactions(minerAddress) {
-  // First: Add the reward transaction
-  this.pendingTransactions.push(
-    new Transaction(null, minerAddress, this.miningReward)
-  );
+    // Add reward transaction
+    this.pendingTransactions.push(
+      new Transaction(null, minerAddress, this.miningReward)
+    );
 
-  //Then create the block with the current transactions.
-  const block = new Block(
-    this.chain.length,
-    new Date().toISOString(),
-    this.pendingTransactions,
-    this.getLatestBlock().hash
-  );
+    // Create new block with pending transactions
+    const block = new Block(
+      this.chain.length,
+      new Date().toISOString(),
+      this.pendingTransactions,
+      this.getLatestBlock().hash
+    );
 
-  block.mineBlock(this.difficulty);
-  this.chain.push(block);
+    block.mineBlock(this.difficulty);
+    this.chain.push(block);
 
-  // Reset transactions
-  this.pendingTransactions = [];
-}
-
-
-  // We calculate how much currency a particular address owns by tracking transactions across all blocks.
+    // Reset pending transactions
+    this.pendingTransactions = [];
+  }
 
   getBalanceOfAddress(address) {
     let balance = 0;
@@ -88,15 +86,15 @@ class Blockchain {
   }
 
   calculateBlockHash(block) {
-    const crypto = require('crypto');
     const data =
       block.index +
       block.timestamp +
       JSON.stringify(block.transactions) +
       block.previousHash +
       block.nonce;
-    return crypto.createHash('sha256').update(data).digest('hex');
+
+    return crypto.createHash("sha256").update(data).digest("hex");
   }
 }
 
-module.exports = Blockchain;
+export default Blockchain;

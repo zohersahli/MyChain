@@ -29,49 +29,58 @@ This project was built as a final assignment for the course **Krypto Valuta och 
 
 ---
 
+## Prerequisites
+
+- Node.js installed
+- MongoDB
+- Copy `.env.example` to `.env` and configure it
+- Copy `frontend/.env.example` to `frontend/.env` and configure it
+
+---
+
 ## How to Run the Project
 
-# 1. Backend (Node.js)
+### 1. Install Dependencies
 
 ```bash
+# Backend
 cd project-3
 npm install
-node nodeServer.js       # Main node on port 3001
-node nodeServer2.js      # Optional second node on port 3002.
 
----
-# 2. Frontend (React + Vite)
-```bash
+# Frontend
 cd frontend
 npm install
-npm run dev
+```
 
-##  Running Tests (Jest)
+### 2. Start Backend Nodes
+
+**Terminal 1 - Node 1 (Port 3001):**
+```bash
+cd project-3
+npm run node1
+```
+
+**Terminal 2 - Node 2 (Port 3002) - Optional:**
+```bash
+cd project-3
+npm run node2
+```
+
+### 3. Start Frontend
+
+**Terminal 3:**
+```bash
+cd project-3/frontend
+npm run dev
+```
+
+## Running Tests (Jest)
+
 ```bash
 npm test
+```
 
-Test Coverage:
-
- Transaction Class
- Block Class
- Blockchain Class (balance, mining, validation)
-
- 
----
-
- Security Measures
-JWT authentication for all private routes
-
-Sanitized user input (using sanitize-html)
-
-Protected against NoSQL injections and XSS
-
-Rate limiting enabled to prevent brute-force and abuse
-
-
-
----
-Assignment Requirements Coverage
+## Assignment Requirements Coverage
 | Requirement                             |Status|
 | --------------------------------------- | ---- |
 | Custom Blockchain                       | Done |
@@ -87,5 +96,6 @@ Assignment Requirements Coverage
 | Security (XSS, NoSQL, RateLimit)        | Done |
 
 ---
-Author
+## Author
+
 Developed by Zoher Sahli – blockchain and full-stack developer student

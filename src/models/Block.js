@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const blockSchema = new mongoose.Schema({
   index: Number,
@@ -6,7 +6,8 @@ const blockSchema = new mongoose.Schema({
   transactions: [mongoose.Schema.Types.Mixed],
   previousHash: String,
   nonce: Number,
-  hash: String,
+  hash: String
 });
 
-module.exports = mongoose.model('Block', blockSchema);
+const Block = mongoose.model("Block", blockSchema);
+export default Block;

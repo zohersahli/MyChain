@@ -6,4 +6,4 @@ class Transaction {
   }
 }
 
-module.exports = Transaction;
+export default Transaction;
